@@ -2,32 +2,32 @@ import sys
 
 
 
-clients = "Pablo, Ricardo"
+clients = ["Pablo", "Ricardo"]
 
 def createClient(client_name):
     global clients
 
-    _addComa()
+    
     if clientName not in clients:
-        clients += client_name
-        _addComa()
+        clients.append(client_name)
+        
         listClients()
     else:
         Message(0)
 
 
 def listClients():
-    global clients
-    print(clients)
+   for id, client in enumerate(clients):
+       print("{}: {}".format(id,client))
 
 
 def updateClient(clientName,updateClientName):
     global clients
 
     if clientName in clients:
-        clients = clients.replace(clientName + ',',updateClientName+',')
+        index = clients.index(clientName)
+        clients[index] = updateClientName
         print(clientName)
-        _addComa()
         listClients()
     else:
         Message(1)
@@ -37,15 +37,11 @@ def deletedClient(clientName):
     global clients
 
     if clientName in clients:
-        clients = clients.replace(clientName + ',' , '')       
+        clients.remove(clientName)
         listClients()
     else:
         Message(0)
       
-def _addComa():
-    global clients
-    clients +=  ", "
-
 
 def Message(code):
 
@@ -59,8 +55,7 @@ def Message(code):
 
 def searchClient(clientName):
     global clients
-    clientsList = clients.split(',')
-    for client in clientsList:
+    for client in clients:
         if client != clientName:
             continue
         else:
